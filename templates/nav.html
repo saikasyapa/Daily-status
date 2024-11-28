@@ -1,0 +1,74 @@
+<header img>
+    <a href="/admin" ><img src="static\magnasoft-logo-2.png" alt="MAGNASOFT Logo" ></a>
+    
+    <h1 style="display: inline;margin-left: 300px;">Magnasoft Consulting India (P) Ltd. </h1><h4 style="float: right;display:inline;margin-right: 60px;color:white;font-family: Georgia, serif;background: linear-gradient( #6c8996, #000000);padding-left: 20px;padding-right: 30px;border-radius: 10px;padding-bottom: 2px;padding-top: 1px;padding-bottom: 1px;">Welcome {{ session['username'] }}</h4>
+    
+    
+</header img>
+
+<!-- <nav >
+    <ul>
+       
+        <li><a href="/admin" id="users-link">Home</a></li>
+        <li><a href="/logout" id="settings-link">Logout</a></li>
+        <li><a href="/requestform" id="settings-link">Raise Request</a></li>
+        <li><a href="/viewtable" id="settings-link">View Request</a></li>
+        <li><a href="/table" id="settings-link">Assign Request</a></li>
+        <li><a href="/admin_dev" id="settings-link">Time Sheet</a></li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Status </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/developer_status" >Time Sheet</a></li>
+                <li><a class="dropdown-item" href="/team_status" >Time Sheet</a></li>
+            </ul>
+    
+        </li>
+
+        
+        
+    </ul>
+    
+</nav> -->
+
+<nav class="navbar navbar-expand-lg" style="width: 100%;" >
+    <div class=".container-fluid" style="width: 100%;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav" style="width: 2150px;margin-top: -8px;margin-left: -17px;margin-right: -15px;">
+                <li class="nav-item" >
+                    <a class="nav-link" href="/admin" id="users-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout" id="settings-link">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/requestform" id="settings-link">Raise Request</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/viewtable" id="settings-link">View Request</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/table" id="settings-link">Assign Request</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/developer_status" id="settings-link">Time Sheet</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Status
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/admin_dev">Developer Status</a>
+                        <a class="dropdown-item" href="/team_status">Team Status</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

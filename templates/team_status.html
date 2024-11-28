@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Developer Daily Status</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='nav.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='dev_team.css') }}">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <style>
+            .header-container {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           width: 100%;
+           margin-left:850px ;
+           border-radius: 50px;
+           
+       }
+       .input-group {
+           margin-right: 900px;
+           width: 18%;
+           
+           border-radius: 25px;
+           
+       }
+       input#total_hours.form-control{
+           font-family: Arial, Helvetica, sans-serif;
+           
+       }
+     
+       </style>
+    </head>
+
+    <body>
+        {% include 'nav.html' %}
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mt-3">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% endwith %}
+
+            <div class="header-container">
+                <h1>Development Team Status</h1>
+                <div class="input-group input-group-lg" >
+                    <span class="input-group-text" for="total_hours" id="inputGroup-sizing-lg" style="background-color: #007bff;color: white;" ><b>Total Hours</b></span>
+                    <input type="text" class="form-control" id="total_hours" name="total_hours" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value="{{ formatted_total_hours_all }}" readonly>
+                </div>
+            </div>
+        <form method="GET" action="{{url_for('team_filter')}}" class="form-inline mb-3" style="margin-left: 300px;">
+            
+            <!-- <label for="filter_s_no" class="mr-2"><b>S_No:</b></label>
+            <input type="text" id="filter_s_no" name="filter_s_no" clas="form-control mr-3" style="margin-right: 10px;" value="{{request.args.get('filter_s_no', '')}}">
+            
+            <label for="filter_project_name" class="mr-2"><b>Project name:</b></label>
+            <input type="text" id="filter_project_name" name="filter_project_name" clas="form-control mr-3" style="margin-right: 10px;" value="{{request.args.get('filter_project_name', '')}}"> -->
+
+            <label for="filter_developer_name" class="mr-2"><b>Developer name:</b></label>
+            <select type="text" id="filter_developer_name" name="filter_developer_name" class="form-control mr-3" style="margin-right: 10px;" value="{{request.args.get('filter_developer_name', '')}}">
+                <option value="">--select Dev--</option>
+                <option value="MS-3951">karthik</option>
+                <option value="MS-3718">Vivek Sridhar</option>
+                <option value="MS-4314">Saimasthan Shaik</option>
+                <option value="MS-3119">Konda Madhu</option>
+                <option value="MS-4571">Somesh Hiremath</option>
+                <option value="MS-4889">Naveen Pandem</option>
+                <option value="MS-4935">Karthikeyan K</option>
+                <option value="MS-4938">Deepak Muvvala</option>
+                <option value="MS-4967">kiran H S</option>
+                <option value="MS-4966">Soujanya Sanjeeva</option>
+                <option value="MS-4393">Srinivasul Seshasai</option>
+                <option value="MS-4990">Suresh Kumar</option>
+                <option value="MS-0018">chandan</option>
+                <option value="MS-I01">srikarsampatirao</option>
+                <option value="MS-0019">Dharshini</option>
+            </select>
+
+            <label for="start_date_filter">Start_Date:</label>
+            <input type = "date" id="start_date_filter" name="start_date_filter" class="form-control mr-3" value = "{{request.args.get('start_date_filter', '')}}">
+
+            <label for="end_date_filter">End_Date:</label>
+            <input type = "date" id="end_date_filter" name="end_date_filter" class="form-control mr-3" value = "{{request.args.get('end_date_filter', '')}}">
+
+
+            <label for="filter_status" class="mr-2" ><b>Status:</b></label>
+            <select id="filter_status" name="filter_status" id="filter_status" class="form-control mr-3" style="margin-right: 10px;" value="{{request.args.get('filter_status', '')}}">
+                <option value="">--Select Status--</option>
+                <option value="Working" {{'selected' if request.args.get('filter_status') == 'Working' else ''}}>Working</option>
+                <option value="Comp" {{'selected' if request.args.get('filter_status') == 'Completed' else ''}}>Completed</option>
+                <option value="Hold" {{'selected' if request.args.get('filter_status') == 'Hold' else ''}}>Hold</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Filter</button>
+            <a href="{{ url_for('dev_export_csv') }}" class="btn btn-primary" style="margin-left: 10px;">Export to CSV</a>
+            
+            
+        </form>
+        
+        <table border="1" class="table table-striped ">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Developer Name</th>
+                    <th>Developer ID</th>
+                    <th>Project Name</th>
+                    <th>Task Activity</th>
+                    <th>task Description</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                    <th>Total Hours</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    
+                    <td><a href="#" class="s_no" data-s_no="{{ row[0] }}">{{ row[0] }}</a></td>
+                    
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>
+                        <span class="description"  data-toggle = "tooltip" title="Click me to read the full description" data-toggle="modal" data-target="#descriptionModal" data-full-description="{{ row[5] }}">
+                            {{ row[5][:20] }}...
+                        </span>
+                    </td>
+                    <td>{{ row[6] }}</td>
+                    <td>{{ row[7] }}</td>
+                    <td>{{ row[8] }}</td>
+                    <td>{{ row[9] }}</td>
+                    
+                    
+                   
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div id="descriptionModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h4>Task Description</h4>
+                <p id="fullDescription"></p>
+            </div>
+        </div>
+    </div>
+        <script>
+            $(document).ready(function() {
+                $(".description").click(function() {
+                    var fullDescription = $(this).data("full-description");
+                    $("#fullDescription").text(fullDescription);
+                    $("#descriptionModal").show();
+                });
+    
+                
+    
+                
+    
+                $(".close").click(function() {
+                    $("#descriptionModal").hide();
+                });
+    
+                $(window).click(function(event) {
+                    if (event.target == document.getElementById("descriptionModal")) {
+                        $("#descriptionModal").hide();
+                    }
+                });
+            });
+        </script>
+
+
+        
+
+    </body>
+    {% if page %}
+    <ul class="pagination">
+        {% if page > 1 %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('team_status', page=1) }}">First</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('team_status', page=page-1) }}">Previous</a>
+            </li>
+        {% endif %}
+        {% for p in range(1, (total // per_page) + 2) %}
+            <li class="page-item{% if p == page %} active{% endif %}">
+                <a class="page-link" href="{{ url_for('team_status', page=p) }}">{{ p }}</a>
+            </li>
+        {% endfor %}
+        {% if page < (total // per_page) + 1 %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('team_status', page=page+1) }}">Next</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('team_status', page=total_pages) }}">Last</a>
+            </li>
+        {% endif %}
+    </ul>
+{% endif %}
+
+
+
+
+</html>

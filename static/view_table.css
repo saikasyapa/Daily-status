@@ -1,0 +1,113 @@
+
+    
+    
+
+.s_no {
+    color: black;
+}
+
+/* General table styling */
+.table-container {
+    margin: 0 auto; /* Center horizontally */
+    width: 80%; /* Adjust as needed */
+}
+h3{
+    text-align: center;
+    color:black;
+    margin-bottom: 30px;
+    margin-top: 15PX;
+    text-decoration:wavy
+}
+
+body{
+  background-color: whitesmoke;
+}
+
+
+table {
+  margin-left: -25%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #bebcbc;
+  border-radius: 10px; /* Radius curve */
+  overflow: hidden; /* Hide overflow from radius curve */
+  
+}
+
+
+th, td {
+  padding: 8px;
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #ffffff; /* Color for even rows */
+}
+
+
+
+/* Styling for the specific row */
+tr:first-child th {
+  background-color: #9ac5ff;
+  color: black;
+}
+/* Styling for the specific row */
+/* tr:first-child th {
+  background-color: #9ac5ff;
+  
+  color: black;
+} */
+
+/* Added blinking animation */
+/* table:hover {
+  animation: blink 1s infinite alternate;
+}
+
+@keyframes blink {
+  from {
+    background-color: white; 
+  }
+  to {
+    background-color: rgb(214, 214, 214); 
+  }
+} */
+
+ul.pagination{
+    margin-left: 900px;
+}
+
+
+form.form-inline.mb-3{
+  margin-left: -100px;
+}
+
+input#filter_s_no{
+  width: 60px;
+  
+}
+input#filter_project_name{
+  width:100px;
+}
+select#filter_developer_name{
+  width:150px;
+}
+.item {
+  font-size: 16px;
+}
+
+/* Medium screens */
+@media (min-width: 768px) {
+  .item {
+      font-size: 18px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+  .item {
+      font-size: 20px;
+  }
+}
+

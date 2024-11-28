@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='main_nav.css')}}">
+    
+    
+    
+    
+</head>
+<body>
+    {% include 'nav.html' %}
+<h1 class="h1"> Request Visualization</h1>
+    <div class="content">
+        <div>
+        <div class="chart-container1"  >
+            <h2 align="center">Bar Chart</h2>
+            <canvas id="barChart" width="410px" height="400px"></canvas>
+        </div>
+        </div>
+        <div>
+        <div class="chart-container2">
+            <h2 align="center">Pie Chart</h2>
+            <canvas id="pieChart" width="400px" height="400px"></canvas>
+        </div>
+        </div>
+
+        <!-- Table -->
+        <div class="k">
+            <h2 style="color: #030303;" align="center" >Status Counts</h2>
+
+            <table id="statusTable" color="black">
+                <thead class="thead-dark" >
+                    <th> Total Requests</th>
+                    {% for index, row in table_data.iterrows() %}
+
+                    
+                    <th>{{ row['status'] }}</th>
+                    
+                    {% endfor %}
+                    
+                </thead>
+                <td>{{table_data['num_requests'].sum() }}</td>
+                {% for index, row in table_data.iterrows() %}
+                
+                    
+                    <td>{{ row['num_requests'] }}</td>
+                
+                {% endfor %}
+                
+            </table>
+        </div>
+
+        <!-- JavaScript for rendering charts -->
+        <script>
+
+        var barCtx = document.getElementById('barChart').getContext('2d');
+        var pieCtx = document.getElementById('pieChart').getContext('2d');
+
+        var graphData = {
+            labels: {{ graph_data.labels | tojson | safe }},
+            datasets: [{
+                label: 'Number of Requests',
+                data: {{ graph_data.data | tojson | safe }},
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(255, 159, 64, 0.7)',
+                    'rgba(153, 102, 255, 0.7)',
+                    'rgba(255, 206, 86, 0.7)'
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(255, 159, 64, 0.7)',
+                    'rgba(153, 102, 255, 0.7)',
+                    'rgba(255, 206, 86, 0.7)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        // Bar Chart
+        var barChart = new Chart(barCtx, {
+            type: 'bar',
+            data: graphData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Pie Chart
+        var pieChart = new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: graphData.labels,
+                datasets: [{
+                    data: graphData.datasets[0].data,
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(255, 159, 64, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(255, 206, 86, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(255, 159, 64, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(255, 206, 86, 0.7)'
+                    ],
+                    borderWidth: 1
+                }]
+            }
+        });
+        </script>
+    </div>
+</body>
+</html>

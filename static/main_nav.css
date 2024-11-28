@@ -1,0 +1,280 @@
+
+    /* Resetting default margins and paddings */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    /* Add this CSS to center the content */
+.content {
+display: flex;
+justify-content: space-evenly;
+ /* Horizontally center the content */
+align-items: baseline; /* Vertically center the content */
+height: 100%; 
+/* Ensure full height */
+}
+
+.inner {
+text-align: center; /* Center text horizontally */
+}
+
+
+    /* Body styles */
+    /* Body styles */
+body {
+font-family: Arial, sans-serif;
+/* background-image: url("static\BG1.jpg");
+background-size: cover; */
+
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+width: 100vw; /* 100% of viewport width */
+height: 100vh; /* 100% of viewport height */
+margin: 0; /* Remove default body margin */
+padding: 0; /* Remove default body padding */
+
+}
+
+    /* Header styles */
+    header {
+   
+        background-color: #777777;
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+       
+    }
+  
+
+    header h1 {
+        font-size: 24px;
+    }
+     .m{
+        position: absolute;
+        top: 400px;
+        left: 700px;
+        color: #ffffff;
+     }
+
+   
+
+    /* Navigation styles */
+    nav ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        background-color: #495057;
+        margin: 0;
+    }
+    nav ul li {
+        margin: 0 1rem;
+    }
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        display: block;
+    }
+    nav ul li a:hover {
+        background-color: #6c757d;
+    }
+
+    nav ul li a:hover {
+        color: #ffd700;
+    }
+
+    /* Content styles */
+    header img {
+        position: absolute; /* Position the logo absolutely */
+        top: 20px; /* Align the top of the logo with the top of the header */
+        left: 10px; /* Align the left of the logo with the left of the header */
+        width: 110px; /* Adjust the width of the logo as needed */
+        height: auto; /* Maintain aspect ratio */
+
+    }
+   
+
+
+    /* Link styles */
+    a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+   
+    p{
+        color: #ffffff;
+        position: absolute;
+        top: 440px;
+        left: 0px;
+    }
+    .content {
+        padding: 100px;
+        margin-top: 80px;
+    }
+    .chart-container1 {
+        margin-bottom: 300rem;
+        width: 500px;
+        height:550px;
+        border-radius: 10px;
+        box-shadow: 10px 10px 10px rgba(70, 70, 70, 0.1);
+    }
+    .k {
+       
+        margin-bottom: 200rem;
+        width: 540px;
+        height:540px;
+        box-shadow: 10px 10px 10px rgba(67, 67, 67, 0.1);
+        background: #f8f9fa;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 15px 4px rgba(67, 67, 67, 0.1);
+
+    }
+    .chart-container2{
+        margin-bottom: 2rem;
+        width: 500px;
+        height:540px;
+        box-shadow: 10px 10px 10px rgba(67, 67, 67, 0.1);
+        background: #f8f9fa;
+        padding: 2rem;
+        border-radius: 10px;
+
+        }
+    .chart-container1 {
+        margin-bottom: 2rem;
+        background: #f8f9fa;
+        padding: 2rem;
+        height:540px;
+        width:540px;
+        border-radius: 10px;
+        
+    }
+     .chart-container2 {
+        background: #f8f9fa;
+        padding: 2rem;
+        
+
+        border-radius: 10px;
+        box-shadow: 0 15px 4px rgba(67, 23, 67, 0.1);
+    }
+    table{
+
+        justify-content: center;
+        margin: 5px   ;
+        margin-top: 100px;
+        box-shadow: 0 15px 4px rgba(67, 67, 67, 0.1);
+       
+    }
+    
+    table th, table td {
+
+        margin-top: -200px;
+        margin-top: 250px;
+        border: 2px solid #dddddd;
+        text-align: center;
+        padding: 15px;
+        padding-bottom: 3px;
+        
+        
+    }
+    
+        
+    
+    table th{
+        background-color:lightslategray ;
+        color: white;
+        padding-bottom: 20px;
+    }
+    table td:hover{
+        background-color:grey;
+        
+        
+    }
+    .h1{
+        margin-top: 10px;
+
+        position: absolute;
+        left: 800px;
+        top:100px
+    
+            }
+            /* Base styles */
+.item {
+    font-size: 16px;
+}
+
+/* Medium screens */
+@media (min-width: 768px) {
+    .item {
+        font-size: 18px;
+    }
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+    .item {
+        font-size: 20px;
+    }
+}
+
+
+
+            /* @keyframes lights {
+                0% {
+                  color: hsl(231, 82%, 37%);
+                  text-shadow:
+                    0 0 1em hsla(0, 0%, 5%, 0.2),
+                    0 0 0.125em hsla(0, 0%, 2%, 0.3),
+                    -1em -0.125em 0.5em hsla(40, 100%, 60%, 0),
+                    1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
+                }
+                
+                30% { 
+                  color: hsl(145, 82%, 26%);
+                  text-shadow:
+                    0 0 1em hsla(0, 0%, 5%, 0.5),
+                    0 0 0.125em hsla(300, 4%, 5%, 0.5),
+                    -0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2),
+                    0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
+                }
+                
+                40% { 
+                  color: hsl(81, 92%, 39%);
+                  text-shadow:
+                    0 0 1em hsla(0, 0%, 4%, 0.5),
+                    0 0 0.125em hsla(0, 0%, 4%, 0.5),
+                    -0.25em -0.125em 0.125em hsla(40, 100%, 60%, 0.2),
+                    0.25em 0.125em 0.125em hsla(200, 100%, 60%, 0.4);
+                }
+                
+                70% {
+                  color: hsl(298, 89%, 35%);
+                  text-shadow:
+                    0 0 1em hsla(0, 4%, 5%, 0.5),
+                    0 0 0.125em hsla(0, 0%, 4%, 0.5),
+                    0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2),
+                    -0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
+                }
+                
+                100% {
+                  color: hsl(230, 40%, 80%);
+                  text-shadow:
+                    0 0 1em hsla(0, 0%, 4%, 0.2),
+                    0 0 0.125em hsla(0, 4%, 5%, 0.3),
+                    1em -0.125em 0.5em hsla(40, 100%, 60%, 0),
+                    -1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
+                }
+                
+              }
+            
+              
+             
+              h4 {
+                
+                animation: lights 5s 750ms linear infinite;
+              }
+         */

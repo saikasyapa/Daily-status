@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Developer Daily Status</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='nav.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='dev_status.css') }}">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <style>
+            #popup-form {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            display: none;
+            color:black;
+        }
+        .s_no{
+            color: black;
+        }
+        label{
+            color:black
+        }
+        </style>
+        
+    </head>
+    <body>
+        {% include 'nav.html' %}
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mt-3">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% endwith %}
+
+        <div class="container">
+            <form class="request-form" action="/developer_status" method="post" id="request-form">
+                <h1>Developer Daily Status</h1>
+
+                <div class="form-group">
+                    <label for="developer_name">Developer Name:</label>
+                    <input placeholder="{{session['username'] }}" autocomplete="off" type="text" name="name" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="developer_id">Developer ID:</label>
+                    <input placeholder="{{session['employee_id'] }}" autocomplete="off" type="text" name="name" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="project_name">Project Name</label>
+                    <input type="text" name="project_name" id="project_name" placeholder="Enter your project name" required>
+                </div>
+                <div class="form-group">
+                    <label for="task_activity">Task Activity</label>
+                    <input type="text" name="task_activity" id="task_activity" placeholder="Enter your task activity" required>
+                </div>
+                <div class="form-group">
+                    <label for="task_description">Task Description</label>
+                    <textarea  name="task_description" id="task_description" placeholder="Enter your task description" required></textarea>
+                </div>
+                <!-- <div class="form-group">
+                    <label for="start_date">Start Date:</label>
+                    <input type="datetime-local" name="start_date" id="start_date" required class="form-control">
+                </div> -->
+                <div>
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+            
+            
+            
+            
+        </div>
+        <table border="1" class="table table-striped ">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Dev Name</th>
+                    <th>Dev ID</th>
+                    <th>Project Name</th>
+                    <th>Task Activity</th>
+                    <th>Task Desc</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                    <th>Total Hours</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    <td><a href='#' class='s_no' data-s_no = "{{ row[0] }}">{{ row[0] }}</a></td>
+                    {% for col in row[1:] %}
+                    <td>{{ col }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div id="popup-form">
+            <form action="{{ url_for('developer_update') }}" method="post">
+                <input type="number" name="s_no" id="s_no" readonly>
+                <div class="form-group">
+                    <label for="status">Status:</label>
+                    <select name="status" id="status" class="form-control">
+                        
+                        <option value="Comp">Comp</option>
+                        <option value="Hold">Hold</option>
+                        <option value="Reassign">Ressign</option>
+                        
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="button" id="close-popup" class="btn btn-secondary">Cancel</button>
+            </form>
+        </div>
+        <script>
+            $(document).ready(function(){
+                $('.s_no').on('click', function(e){
+                    e.preventDefault(); // Prevent the default link behavior
+                    var s_no = $(this).data('s_no');
+                    $('#s_no').val(s_no);
+                    $('#popup-form').show();
+                });
+    
+                $('#close-popup').on('click', function(){
+                    $('#popup-form').hide();
+                });
+                
+                
+            });
+        </script>
+  
+
+       
+    </body>
+</html>

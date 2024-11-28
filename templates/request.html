@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='request.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='nav.css') }}">
+    
+    <title>Request Form</title>
+</head>
+<body>
+    {% include 'nav.html' %}
+
+    <div class="container my-5">
+        
+        <form class="request-form" action="/requestform" method="post" id="request-form" >
+            
+            <div class="form-group">
+                <label for="department">Department</label>
+                <select type="text" name="department" id="department"  placeholder="Enter your department name" required>
+                    <option value="PTG">PTG</option>
+                    <option value="LiDAR">LiDAR</option>
+                    <option value="TELECOM">TELECOM</option>
+                    <option value="KADASTER">KADASTER</option>
+                    <option value="2D-MAPPING">2D-MAPPING</option>
+                    <option value="BIM">BIM</option>
+                    <option value="ESRI">ESRI</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="projectname">Project Name</label>
+                <input type="text" name="project_name" id="project_name"  placeholder="Enter your project name" required>
+            </div>
+            <div class="form-group">
+                <label for="requestdescription">Request Description</label>
+                <textarea  name="request_description" id="request_description" rows="4" cols="92"  required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="actual_time">Actual Time</label>
+                <input type="number" name="actual_time" id="actual_time"  placeholder="Enter actual hours" required>
+            </div>
+           
+            <div class="form-group">
+                <label for="timesavinghours">Time Saving Hours</label>
+                <input type="text" name="time_saving_hours" id="time_saving_hours"  placeholder="Enter time saving hours" >
+            </div>
+
+            <div class="form-group">
+                <label for="units_of_measurement">Units of measurement</label>
+                <input type="text" name="units_of_measurement" id="units_of_measurement"  placeholder="Enter units of measurement" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="priority">Priority</label>
+                <select name="priority" id="priority" required>
+                    <option value="P1">P1</option>
+                    <option value="P2">P2</option>
+                    <option value="P3">P3</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="request_type">Request Type</label>
+                <select name="request_type" id="request_type" required>
+                    <option value="Production">Production</option>
+                    <option value="Quality">Quality</option>
+                    <option value="Others">Others</option>
+                </select>
+            
+                
+            </div>
+            <div class="form-group">
+                <button type="submit"><a href="/viewtable"><span>Submit Request</span></button></a>
+            </div>
+        </form>
+    </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mt-3">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% endwith %}
+
+   
+    
+
+    
+</body>
+
+
+</html>

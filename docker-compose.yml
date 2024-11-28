@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  request_form:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    environment:
+      - FLASK_ENV=development
+    depends_on:
+      - database
+    
+      
+
+  database:
+    restart: unless-stopped
+    image: postgres:13
+    environment:
+      POSTGRES_DB: MTAG_Request
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: dev
+      
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

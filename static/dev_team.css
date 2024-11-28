@@ -1,0 +1,171 @@
+.table {
+    margin-left: 15%;
+    margin-right: 50%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 70%;
+    
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px; /* Radius curve */
+    overflow: hidden; /* Hide overflow from radius curve */
+    
+  }
+  body{
+      background-color: whitesmoke;
+      
+  }
+  ul.pagination{
+    margin-left: 900px;
+   
+}
+  
+  th, td {
+    
+    padding: 8px;
+    text-align: center;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  /* Styling for the specific row */
+  tr:first-child th {
+    background-color: #9ac5ff;
+    color: black;
+  }
+  
+  /* Added blinking animation */
+  table:hover {
+    animation: blink 1s infinite alternate;
+  }
+h1{
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+
+}
+.s_no{
+  color: black;
+}
+input#filter_s_no{
+    width: 60px;
+    
+}
+input#filter_project_name{
+    width:100px;
+}
+input#filter_developer_name{
+    width:100px;
+}
+th {
+  white-space: nowrap;
+}
+
+        /* Add some basic styling for the popup */
+        
+        .s_no {
+            color: black;
+        }
+        label {
+            color: black;
+        }
+        .table th {
+            background-color: #f8f9fa;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            position: relative;
+        }
+        .table th:hover {
+            background-color: #e9ecef;
+        }
+        .tooltip {
+            display: none;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 5px;
+            border-radius: 4px;
+            z-index: 1;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .table th:hover .tooltip {
+            display: block;
+            opacity: 1;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9998; /* Ensure modal is below popup form */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: white;
+            
+            
+        }
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 10px;
+            border: 1px solid #888;
+            width: 80%;
+            color: #000;
+        }
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        p#fullDescription{
+            color: #000;
+            margin-top: -300px;
+            
+        }
+        th {
+            white-space: nowrap;
+        }
+        .table td:hover .data-toggle {
+            display: block;
+            opacity: 1;
+        }
+        .item {
+          font-size: 16px;
+      }
+      
+      /* Medium screens */
+      @media (min-width: 768px) {
+          .item {
+              font-size: 18px;
+          }
+      }
+      
+      /* Large screens */
+      @media (min-width: 1200px) {
+          .item {
+              font-size: 20px;
+          }
+      }
+       
+        
+        
+   
+
+
+ 

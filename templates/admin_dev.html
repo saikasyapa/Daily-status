@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='dev_admin.css')}}">
+</head>
+<body>
+    {% include 'nav.html' %}
+    <div class="container">
+        <form method="GET" action="{{ url_for('developer_filter') }}" class="form-inline mb-3" style="margin-left: -70px; margin-top: 100px;">
+            <label for="start_date_filter" class="mr-2"><b>Start Date:</b></label>
+            <input type="date" id="start_date_filter" name="start_date_filter" class="form-control mr-3" value="{{ request.args.get('start_date_filter', '') }}">
+
+            <label for="end_date_filter" class="mr-2"><b>End Date:</b></label>
+            <input type="date" id="end_date_filter" name="end_date_filter" class="form-control mr-3" value="{{ request.args.get('end_date_filter', '') }}">
+
+            <label for="filter_developer_name" class="mr-2"><b>Dev Name:</b></label>
+            <select id="filter_developer_name" name="filter_developer_name" class="form-control mr-3">
+                <option value="">--select Dev--</option>
+                <option value="MS-3951" {{ 'selected' if request.args.get('filter_developer_name') == 'MS-3951' else '' }}>karthik</option>
+                <option value="MS-3718" {{ 'selected' if request.args.get('filter_developer_name') == 'MS-3718' else '' }}>Vivek Sridhar</option>
+                <option value="MS-4314" {{ 'selected' if request.args.get('filter_developer_name') == 'MS-4314' else '' }}>Saimasthan Shaik</option>
+                <option value="MS-3119" {{ 'selected' if request.args.get('filter_developer_name') == 'MS-3119' else '' }}>Konda Madhu</option>
+                <option value="MS-4571" {{ 'selected' if request.args.get('filter_developer_name') == 'MS-4571' else '' }}>Somesh Hiremath</option>
+                <option value="MS-4889" {{ 'selected' if request.args.get('filter_developer_name') == 'MS-4889' else '' }}>Naveen Pandem</option>
+                <option value="MS-4938" {{ 'selected' if request.args.get('filter_developer_name') == 'MS-4938' else '' }}>Karthikeyan K</option>
+                <option value="MS-4938" {{ 'selected' if request.args.get('filter_developer_name') == 'MS-4938' else '' }}>Deepak Muvvala</option>
+                <option value="MS-4967" {{ 'selected' if request.args.get('filter_developer_name') == 'MS-4967' else '' }}>kiran H S</option>
+                <option value="MS-4966" {{ 'selected' if request.args.get('filter_developer_name') == 'MS-4966' else '' }}>Soujanya Sanjeeva</option>
+                <option value="MS-4393" {{ 'selected' if request.args.get('filter_developer_name') == 'MS-4393' else '' }}>Srinivasul Seshasai</option>
+                <option value="MS-4990" {{ 'selected' if request.args.get('filter_developer_name') == 'MS-4990' else '' }}>Suresh Kumar</option>
+                <!-- Add options dynamically -->
+                <!-- {% for dev in ['Karthik', 'Vivek Sridhar', 'Sai Masthan', 'Madhu', 'Somesh', 'Naveen', 'Karthikeyan', 'Deepak', 'Kiran', 'Soujanya', 'Seshasai', 'Suresh Kumar'] %}
+                <option value="{{ dev }}" {% if request.args.get('filter_developer_name') == dev %} selected {% endif %}>{{ dev }}</option>
+                {% endfor %} -->
+            </select>
+            <label for="filter_status" class="mr-2"><b>Status:</b></label>
+            <select id="filter_status" name="filter_status" class="form-control mr-3">
+                <option value="">--Select Status--</option>
+                <option value="Working" {{ 'selected' if request.args.get('filter_status') == 'Working' else '' }}>WIP</option>
+                <option value="Comp" {{ 'selected' if request.args.get('filter_status') == 'Comp' else '' }}>Completed</option>
+                <option value="Hold" {{ 'selected' if request.args.get('filter_status') == 'Hold' else '' }}>Hold</option>
+                <!-- {% for status in ['WIP', 'Completed', 'YTS', 'Hold'] %}
+                <option value="{{ status }}" {% if request.args.get('filter_status') == status %} selected {% endif %}>{{ status }}</option>
+                {% endfor %} -->
+            </select>
+            <button type="submit" class="btn btn-primary">Filter</button>
+            <!-- <a href="{{ url_for('export_csv') }}" class="btn btn-primary ml-2">Export to CSV</a> -->
+        </form>
+    </div>
+    <h1 class="h1" style="margin-left: -50px;">Daily Status Visualization</h1>
+    <div class="content">
+        <div class="chart-container1">
+            <h2 align="center">Bar Chart</h2>
+            <canvas id="barChart" width="410px" height="400px"></canvas>
+        </div>
+        <div class="chart-container2">
+            <h2 align="center">Pie Chart</h2>
+            <canvas id="pieChart" width="400px" height="400px"></canvas>
+        </div>
+        <div class="k">
+            <h2 style="color: #030303;" align="center">Status Counts</h2>
+            <table id="statusTable" class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Total Requests</th>
+                        {% for status in graph_data['labels'] %}
+                        <th>{{ status }}</th>
+                        {% endfor %}
+                        <th>Total Hours</th> <!-- New column for total hours -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ graph_data['data']|sum }}</td>
+                        {% for count in graph_data['data'] %}
+                        <td>{{ count }}</td>
+                        {% endfor %}
+                        <td>{{ graph_data['total_hours_sum'] }}</td> <!-- Display total hours -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var barCtx = document.getElementById('barChart').getContext('2d');
+            var pieCtx = document.getElementById('pieChart').getContext('2d');
+
+            var graphData = {
+                labels: {{ graph_data['labels']|tojson|safe }},
+                datasets: [{
+                    label: 'Number of Requests',
+                    data: {{ graph_data['data']|tojson|safe }},
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',    
+                        'rgba(54, 162, 235, 0.7)',    
+                        'rgba(255, 206, 86, 0.7)',    
+                        'rgba(75, 192, 192, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 0.7)',    
+                        'rgba(54, 162, 235, 0.7)',    
+                        'rgba(255, 206, 86, 0.7)',    
+                        'rgba(75, 192, 192, 0.7)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+
+            // Bar Chart
+            var barChart = new Chart(barCtx, {
+                type: 'bar',
+                data: graphData,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Pie Chart
+            var pieChart = new Chart(pieCtx, {
+                type: 'pie',
+                data: {
+                    labels: graphData.labels,
+                    datasets: [{
+                        data: graphData.datasets[0].data,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.7)',    
+                            'rgba(54, 162, 235, 0.7)',    
+                            'rgba(255, 206, 86, 0.7)',    
+                            'rgba(75, 192, 192, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 0.7)',    
+                            'rgba(54, 162, 235, 0.7)',    
+                            'rgba(255, 206, 86, 0.7)',    
+                            'rgba(75, 192, 192, 0.7)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+        });
+    </script>
+</body>
+</html>

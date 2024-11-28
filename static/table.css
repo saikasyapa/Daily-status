@@ -1,0 +1,147 @@
+/* h3{
+    text-align: center;
+    color: whitesmoke;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    text-decoration:wavy
+}
+body{
+    background: url('./BG4.jpg');
+    background-size: cover;
+}
+
+
+
+
+
+table,th,td {
+    
+        width: 100%;
+        border-collapse: collapse;
+        margin-left: -35%;
+        padding: 10px;
+        text-align: center;
+        background-color:white;
+        padding-bottom: 5px;
+        
+        
+        
+}
+th{
+    
+    background-color:lightblue;
+    font-size: large;
+    
+}
+td{
+    max-width: 800px;
+}
+ul.pagination{
+    margin-left: 900px;
+    
+    
+    
+} */
+
+.s_no {
+    color: black;
+}
+
+
+.table-container {
+    margin: 0 auto; /* Center horizontally */
+    width:100%; /* Adjust as needed */
+}
+h3{
+    text-align: center;
+    color: black;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    text-decoration:wavy
+}
+
+table {
+  margin-left: -20%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #bebcbc;
+  border-radius: 10px; /* Radius curve */
+  overflow: auto;
+  
+ 
+  
+}
+body{
+    background-color: whitesmoke;
+    
+}
+
+th, td {
+  padding: 8px;
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #ffffff; /* Color for even rows */
+}
+
+
+
+/* Styling for the specific row */
+tr:first-child th {
+  background-color: #9ac5ff;
+  color: black;
+}
+
+/* Added blinking animation */
+/* table:hover {
+  animation: blink 100s infinite alternate;
+}
+
+@keyframes blink {
+  from {
+    background-color: white; 
+  }
+  to {
+    background-color: rgb(214, 214, 214); 
+  }
+} */
+
+ul.pagination{
+    margin-left: 900px;
+}
+
+input#filter_s_no{
+  width: 60px;
+  
+}
+input#filter_project_name{
+  width:100px;
+}
+select#filter_developer_name{
+  width:150px;
+}
+.item {
+  font-size: 16px;
+}
+
+/* Medium screens */
+@media (min-width: 768px) {
+  .item {
+      font-size: 18px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+  .item {
+      font-size: 20px;
+  }
+}
+
+
+
+
+
